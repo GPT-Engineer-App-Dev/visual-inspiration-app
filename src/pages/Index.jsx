@@ -51,20 +51,16 @@ const Index = () => {
   };
 
   return (
-    <Box position="relative" height="100vh" bg="black" color="yellow">
-      <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" textAlign="center">
-        <VStack spacing={4}>
-          <Box border="2px" borderColor="yellow" borderRadius="md" p={4} textAlign="center" width="100%">
-            <Text fontSize="4xl" fontFamily="monospace">{formatTime(time)}</Text>
-          </Box>
-          <HStack spacing={4}>
-            <Button colorScheme="yellow" onClick={startStop}>{running ? "Stop" : "Start"}</Button>
-            <Button colorScheme="yellow" onClick={splitReset}>{running ? "Split" : "Reset"}</Button>
-            <Button colorScheme="yellow" onClick={onOff}>On/Off</Button>
-          </HStack>
-        </VStack>
-      </Box>
-      <Box overflowY="auto" maxHeight="50vh" width="100%" mt="20vh">
+    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" bg="black" color="yellow">
+      <VStack spacing={4}>
+        <Box border="2px" borderColor="yellow" borderRadius="md" p={4} textAlign="center" width="100%">
+          <Text fontSize="4xl" fontFamily="monospace">{formatTime(time)}</Text>
+        </Box>
+        <HStack spacing={4}>
+          <Button colorScheme="yellow" onClick={startStop}>{running ? "Stop" : "Start"}</Button>
+          <Button colorScheme="yellow" onClick={splitReset}>{running ? "Split" : "Reset"}</Button>
+          <Button colorScheme="yellow" onClick={onOff}>On/Off</Button>
+        </HStack>
         <VStack spacing={2} align="stretch">
           {splits.map((split, index) => (
             <Text key={index} fontSize="lg" fontFamily="monospace">
@@ -72,8 +68,8 @@ const Index = () => {
             </Text>
           ))}
         </VStack>
-      </Box>
-    </Box>
+      </VStack>
+    </Container>
   );
 };
 
