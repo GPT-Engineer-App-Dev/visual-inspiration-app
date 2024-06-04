@@ -5,6 +5,7 @@ const Index = () => {
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
   const [splits, setSplits] = useState([]);
+  const [previousSplitTime, setPreviousSplitTime] = useState(0);
   const timerRef = useRef(null);
 
   const startStop = () => {
@@ -21,10 +22,13 @@ const Index = () => {
 
   const splitReset = () => {
     if (running) {
-      setSplits([...splits, time]);
+      const elapsedTimeSinceLastSplit = time - previousSplitTime;
+      setSplits([...splits, { total: time, elapsed: elapsedTimeSinceLastSplit }]);
+      setPreviousSplitTime(time);
     } else {
       setTime(0);
       setSplits([]);
+      setPreviousSplitTime(0);
     }
   };
 
@@ -35,6 +39,7 @@ const Index = () => {
     }
     setTime(0);
     setSplits([]);
+    setPreviousSplitTime(0);
   };
 
   const formatTime = (time) => {
@@ -58,7 +63,9 @@ const Index = () => {
         </HStack>
         <VStack spacing={2} align="stretch">
           {splits.map((split, index) => (
-            <Text key={index} fontSize="lg" fontFamily="monospace">{`Split ${index + 1}: ${formatTime(split)}`}</Text>
+            <Text key={index} fontSize="lg" fontFamily="monospace">
+              {`Split ${index + 1}: Total: ${formatTime(split.total)}, Elapsed: ${formatTime(split.elapsed)}`}
+            </Text>
           ))}
         </VStack>
       </VStack>
