@@ -38,17 +38,17 @@ const Index = () => {
   };
 
   const formatTime = (time) => {
-    const milliseconds = Math.floor((time % 1000) / 100); // Calculate tenths of a second
+    const hundredths = Math.floor((time % 1000) / 10); // Calculate hundredths of a second
     const seconds = `0${Math.floor((time / 1000) % 60)}`.slice(-2);
     const minutes = `0${Math.floor((time / 60000) % 60)}`.slice(-2);
     const hours = `0${Math.floor(time / 3600000)}`.slice(-2);
-    return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+    return `${hours}:${minutes}:${seconds}.${`0${hundredths}`.slice(-2)}`;
   };
 
   return (
     <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" bg="black" color="yellow">
       <VStack spacing={4}>
-        <Box border="2px" borderColor="yellow" borderRadius="md" p={4} textAlign="center">
+        <Box border="2px" borderColor="yellow" borderRadius="md" p={4} textAlign="center" width="100%">
           <Text fontSize="4xl" fontFamily="monospace">{formatTime(time)}</Text>
         </Box>
         <HStack spacing={4}>
